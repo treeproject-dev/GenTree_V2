@@ -125,7 +125,7 @@ public class FirstPage {
 			// sb.append("<style>table, th, td {border: 1px solid black;}</style>");
 			sb.append("<tr><td>Id</td><td>Name</td><td>Surname</td></tr>");
 			for (Person it : persons) {
-				String callF = "<a href=/findbyid?id=" + it.getId() + ">" + it.getId() + "</a>";
+				String callF = "<a href=/findbyid?id=" + it.getPid() + ">" + it.getPid() + "</a>";
 				sb.append("<tr><td>" + callF + "</td><td>" + it.getFirstName() + "</td><td>" + it.getSurName()
 						+ "</td></tr>");
 			}

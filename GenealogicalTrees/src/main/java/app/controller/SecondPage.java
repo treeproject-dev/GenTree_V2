@@ -1,5 +1,8 @@
 package app.controller;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import app.domain.Person;
 import app.service.FindById;
+import app.tree.Tree;
 
 @RestController
 public class SecondPage {
@@ -37,6 +41,23 @@ public class SecondPage {
 		if (ids!=0) {
 		
 		List <Person> list =findId.findById(ids);
+		String path = "\\";
+		
+		//Save Person -> File "persons.js"
+		Tree t = new Tree(list,null);
+		
+		try {
+		t.personsToJSONFile(path + "js/persons.js");
+		
+		BufferedReader reader = new BufferedReader(new FileReader(path+"PersonDrawer.html")); 
+		while (reader.ready()) {									    
+			String str = reader.readLine();
+			sb.append(str);
+			};
+		reader.close();	
+		}
+		 catch (IOException x) { System.err.print(x); }
+		}
 		//Person person=
 		
 		//sb.append("<canvas id=\"myCanvas\" width=\"1000\" height=\"550\" style=\"margin: 0px; border:2px solid #d3d3d3;\"> ");
@@ -44,10 +65,10 @@ public class SecondPage {
 		//sb.append("<input type=\"file\" id=\"jsonFile\" name=\"jsonFile\" />                                             ");
 		//sb.append("<p id=\"screen-log\" style=\"\"></p>                                                                ");
 		//sb.append("<script src=\"/prototypeI.js\"></script>                                                        ");
-		sb.append(list.toString());
+		//sb.append(list.toString());
 		sb.append("<br/><br/>");
 				//person.toPersonFrame(ids);
-		}
+		
 		sb.append("<a href='/'>Back</a></p>");
 		sb.append("</body></html>");
 		return sb.toString();
