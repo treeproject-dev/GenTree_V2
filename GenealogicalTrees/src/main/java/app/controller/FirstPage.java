@@ -29,7 +29,7 @@ public class FirstPage {
 	public static DateConverters conv = new DateConverters();
 	//public static AppConnect conn = new AppConnect();
 
-	@RequestMapping("/")
+/*	@RequestMapping("/no")
 	public String select() {
 		StringBuilder sb = new StringBuilder();
 		String header = "<html><head><title>FindByID page</title><meta charset=\"utf-8\"><link rel=\"stylesheet\" href=\"/css/design.css\"></head><body>";	
@@ -41,7 +41,7 @@ public class FirstPage {
 
 		return sb.toString();
 	}
-
+*/
 	@Autowired
 	protected InsertPersons save;
 	
@@ -50,7 +50,7 @@ public class FirstPage {
 	public String test(HttpServletRequest request, HttpServletResponse response) {
 
 		StringBuilder sb = new StringBuilder();
-		String header = "<html><head><title>FindByID page</title><meta charset=\"utf-8\"><link rel=\"stylesheet\" href=\"/css/design.css\"></head><body>";	
+		String header = "<html><head><title>FindByID page</title><meta charset=\"utf-8\"><link rel=\"stylesheet\" href=\"/css/style.css\"></head><body>";	
 		sb.append(header);
 		sb.append("<p><form action=''>                                              ");
 		sb.append("  <label for='fname'>First name:</label><br/>                    ");
@@ -109,7 +109,7 @@ public class FirstPage {
 			HttpServletResponse response) {
 		//FindAllByNames find = new FindAllByNames();
 		StringBuilder sb = new StringBuilder();
-		String header = "<html><head><title>FindByID page</title><meta charset=\"utf-8\"><link rel=\"stylesheet\" href=\"/css/design.css\"></head><body>";	
+		String header = "<html><head><title>FindByID page</title><meta charset=\"utf-8\"><link rel=\"stylesheet\" href=\"/css/style.css\"></head><body>";	
 		sb.append(header);
 		sb.append("<p><form action=''>");
 		sb.append("<label for='fname'>First name:</label><br/>");

@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <meta charset="UTF-8" />
+      <title>Welcome</title>
+      <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+   </head>
+   <body>
+      <h1>Welcome to Genealogical Tree</h1>
+      <h2 th:utext="${greetings}">..!..</h2>
+       
+ 	<h3>
+      <a th:href="@{/find}">Find Person</a>
+      <br/>  
+      <a th:href="@{/save}">Save new Person</a></h3>
+   </body>
+    
+</html>

@@ -1,12 +1,18 @@
 body {
   font-family: Arial, Verdana,  sans-serif; /* fonts */
   font-size: 11pt; /* size  */
-  background-color: grey; /* color */
+  background-color: #ccffff; /* color */
   color: #333; /* text color */ 
 }
 h1 {
-  color: #a52a2a; /* h1 color */
+  color:#0000FF; /* h1 color */
   font-size: 24pt; /* h1 size */
   font-family: Georgia, Times, serif; /* h1 font */
   font-weight: normal; /* h1 normal text  */
+}
+h2 {
+    color:#FF0000;
+}
+h3 {
+    color:#003333;
 }
