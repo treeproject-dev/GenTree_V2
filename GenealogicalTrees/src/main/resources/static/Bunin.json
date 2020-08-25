@@ -1,0 +1,11 @@
+{"name":"Иван Алексеевич",
+ "surname":"Бунин",
+ "gender":"M",
+ "birth":"10.10.1870",
+ "death":"08.11.1953",
+ "family":null,
+ "x":700,
+ "y":360,
+ "active":false,
+ "hiden":false,
+ "move":false}

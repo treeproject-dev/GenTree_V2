@@ -1,0 +1,11 @@
+{"name":" Joséphine",
+ "surname":"de Beauharnais",
+ "gender":"F",
+ "birth":"23.06.1763",
+ "death":"29.05.1814",
+ "family":null,
+ "x":800,
+ "y":460,
+ "active":false,
+ "hiden":false,
+ "move":false}
