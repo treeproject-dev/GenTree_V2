@@ -1,2 +1,2 @@
 //Persons:
-var jpersons = '[{"id":"0", "name":"Donald", "surname":"Trump", "gender":"M", "birth":"1946-06-14", "death":"", "family":null, "x":100, "y":100, "active":false, "hiden":false, "move":false}]'
+var jpersons = '[{"id":"0", "name":"Tiffany", "surname":"Trump", "gender":"F", "birth":"1993-10-13", "death":"", "family":null, "x":100, "y":100, "active":false, "hiden":false, "move":false}]'

@@ -1,6 +1,7 @@
 package app.controller;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import app.domain.Person;
@@ -25,6 +27,7 @@ public class SecondPage {
 	
 
 	@RequestMapping("/findbyid")
+	@ResponseBody
 	public String findById(@RequestParam(value = "id", required = false) String id, HttpServletRequest request, HttpServletResponse response) {
 		int ids=0;
 		StringBuilder sb = new StringBuilder();
@@ -41,29 +44,31 @@ public class SecondPage {
 		if (ids!=0) {
 		
 		List <Person> list =findId.findById(ids);
-		String path = "\\";
+		//String path = "src/main/resources/";
 		
 		//Save Person -> File "persons.js"
 		Tree t = new Tree(list,null);
 		
 		try {
-		t.personsToJSONFile(path + "js/persons.js");
-		
-		BufferedReader reader = new BufferedReader(new FileReader(path+"PersonDrawer.html")); 
+		t.personsToJSONFile("src\\main\\resources\\static\\js\\persons.js");
+	/*	
+		BufferedReader reader = new BufferedReader(new FileReader("src\\main\\resources\\static\\PersonDrawer.html")); 
 		while (reader.ready()) {									    
 			String str = reader.readLine();
 			sb.append(str);
 			};
-		reader.close();	
+		reader.close();	*/
 		}
 		 catch (IOException x) { System.err.print(x); }
 		}
 		//Person person=
-		
-		//sb.append("<canvas id=\"myCanvas\" width=\"1000\" height=\"550\" style=\"margin: 0px; border:2px solid #d3d3d3;\"> ");
-		//sb.append("Your browser does not support the HTML5 canvas tag.</canvas>                                    ");
-		//sb.append("<input type=\"file\" id=\"jsonFile\" name=\"jsonFile\" />                                             ");
-		//sb.append("<p id=\"screen-log\" style=\"\"></p>                                                                ");
+		sb.append("<div id=\"myDiv\"></div><body>");
+		sb.append("<canvas id=\"myCanvas\" width=\"1000\" height=\"550\" style=\"margin: 0px; border:2px solid #d3d3d3;\"> ");
+		sb.append("Your browser does not support the HTML5 canvas tag.</canvas>                                    ");
+		sb.append("<input type=\"file\" id=\"jsonFile\" name=\"jsonFile\" />                                             ");
+		sb.append("<p id=\"screen-log\" style=\"\"></p>  "); 
+		sb.append("<script src=\"/js/persons.js\"></script>");
+		sb.append("<script src=\"/js/kod.js\"></script>");
 		//sb.append("<script src=\"/prototypeI.js\"></script>                                                        ");
 		//sb.append(list.toString());
 		sb.append("<br/><br/>");
