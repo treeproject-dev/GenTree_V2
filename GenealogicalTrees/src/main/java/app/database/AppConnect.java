@@ -1,7 +1,10 @@
 package app.database;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -36,22 +39,46 @@ public class AppConnect {
 	@Value("${spring.datasource.password}")
 	private static String pass;
 	
-/*
-	@Autowired
+
+*/
+	public static String url,name,pass;
 	public AppConnect() {
 		super();
-	//	init();	
+		getAppProp();
 	}
 
 	
-*/
+
+	
+	
+	
+	public static void getAppProp() {
+		try {
+		BufferedReader reader = new BufferedReader(new FileReader("src\\main\\resources\\pass.txt")); 
+		List<String>passFromFile = new ArrayList<>();
+		while (reader.ready()) {									    
+			String str = reader.readLine();
+			passFromFile.add(str);
+			};
+			url = passFromFile.get(0);
+			name = passFromFile.get(1);
+			pass = passFromFile.get(2);
+			reader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}	
+		
+	}
+	
+	
 	@PostConstruct
 	public static Connection init() {
 		Connection conn = null;		
-		try {		
-			String url = "jdbc:mysql://www.999.id.lv/?autoReconnect=true&serverTimezone=UTC&characterEncoding=utf8";
+		try {
+			
+			//String url = "jdbc:mysql://www.999.id.lv/?autoReconnect=true&serverTimezone=UTC&characterEncoding=utf8";
 			Class.forName("com.mysql.cj.jdbc.Driver"); // Load the driver class
-			conn = DriverManager.getConnection(url, "root", "Student007"); // Create connection
+			conn = DriverManager.getConnection(url, name, pass); // Create connection
 			conn.setAutoCommit(false);
 			
 		} catch (Exception e) {

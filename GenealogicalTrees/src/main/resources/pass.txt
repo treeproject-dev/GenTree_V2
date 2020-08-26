@@ -1,0 +1,3 @@
+jdbc:mysql://www.999.id.lv/?autoReconnect=true&serverTimezone=UTC&characterEncoding=utf8
+root
+Student007
