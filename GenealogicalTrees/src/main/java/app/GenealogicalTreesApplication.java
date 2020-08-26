@@ -12,9 +12,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 import app.domain.Person;
 import app.domain.Wedding;
-import app.service.FindByFamiliesId;
-import app.service.FindById;
-import app.service.GetListsForWeddings;
+
 
 @ComponentScan
 @EnableAutoConfiguration

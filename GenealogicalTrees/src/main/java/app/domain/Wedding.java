@@ -21,6 +21,22 @@ public class Wedding {
 
 	// additional:
 	// ...
+	/****************************************/
+
+	// ARS:
+	// These variables represent id-es from dataBase
+	// and are used in class Tree when interlinks are set.
+	//
+	// I believe that it's better to put them inside class than
+	// send them separately with several additional arrays/lists.
+	//
+	public int mid; // <- marriage ID;
+	public int pidH; // <- husband's ID;
+	public int pidW; // <- wife's ID;
+	
+	// end//
+
+	/****************************************/
 
 	/* Constructor */
 
@@ -48,21 +64,8 @@ public class Wedding {
 		this.wife = wife;
 	}
 
-	/****************************************/
 
-	// ARS:
-	// These variables represent id-es from dataBase
-	// and are used in class Tree when interlinks are set.
-	//
-	// I believe that it's better to put them inside class than
-	// send them separately with several additional arrays/lists.
-	//
-	public int mid; // <- marriage ID;
-	public int pidH; // <- husband's ID;
-	public int pidW; // <- wife's ID;
-	// end//
 
-	/****************************************/
 
 	/* ---==[Navigation]==--- */
 
@@ -114,6 +117,10 @@ public class Wedding {
 	@Override
 	public String toString() {
 		return "(" + husband + " <=> " + wife + ")";
+	}
+	
+	public String toIdString() {
+		return ""+mid+": "+pidH+" : "+pidW;
 	}
 
 }

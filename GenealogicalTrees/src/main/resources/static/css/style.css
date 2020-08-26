@@ -5,7 +5,8 @@ body {
   color: #333; /* text color */ 
 }
 h1 {
-  color:#0000FF; /* h1 color */
+  color:#ffffFF; /* h1 color */
+  background-color: #00cccc; /* color */
   font-size: 24pt; /* h1 size */
   font-family: Georgia, Times, serif; /* h1 font */
   font-weight: normal; /* h1 normal text  */

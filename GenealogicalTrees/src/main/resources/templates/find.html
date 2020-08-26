@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <meta charset="UTF-8" />
+      <title>Find Person</title>
+      <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+   </head>
+   <body>
+      <h1>Find Persons</h1>
+      <div>
+   			<h2>Test Finds web</h2>
+   			
+   		<p><form action='/getThisPersons'>
+		<label for='fname'>First name:</label><br/>
+		<input type='text' name='name' value=''><br/>
+		<label for='lname'>Last name:</label><br/>
+		<input type='text' name='surname'  value=''><br/>
+		<input type='submit' value='Submit'>
+		</form><br/>
+      </div>
+   </body>
+</html>

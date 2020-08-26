@@ -14,11 +14,9 @@ class DateConvertersTest {
 	void testIsCorrectDate() {
 		String wrongDate = "2019-AA-#";
 		String okDate = "2020-05-01";
-		boolean result;
-		result = dc.isCorrectDate(wrongDate);
-		assertEquals(false, result);
-		result = dc.isCorrectDate(okDate);
-		assertEquals(true, result);
+		
+		assertEquals(false, dc.isCorrectDate(wrongDate));	
+		assertEquals(true, dc.isCorrectDate(okDate));
 		
 	}
 

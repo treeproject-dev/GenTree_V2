@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,20 +16,27 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import app.database.AppConnect;
 import app.domain.Person;
-import app.service.FindById;
+import app.domain.Wedding;
 import app.tree.Tree;
 
 @RestController
 public class SecondPage {
 	
-	@Autowired
-	FindById findId;
+	//@Autowired
+	//FindById findId;
 	
+	//@Autowired
+	//FindByFamiliesId findByFamiliesId;
+	
+	//@Autowired
+	//Tree t;
 
 	@RequestMapping("/findbyid")
 	@ResponseBody
 	public String findById(@RequestParam(value = "id", required = false) String id, HttpServletRequest request, HttpServletResponse response) {
+		
 		int ids=0;
 		StringBuilder sb = new StringBuilder();
 		String header = "<html><head><title>FindByID page</title><meta charset=\"utf-8\"><link rel=\"stylesheet\" href=\"/css/design.css\"></head><body>";	
@@ -43,14 +51,17 @@ public class SecondPage {
 			}
 		if (ids!=0) {
 		
-		List <Person> list =findId.findById(ids);
+		List <Person> list =AppConnect.findById(ids);
 		//String path = "src/main/resources/";
-		
 		//Save Person -> File "persons.js"
-		Tree t = new Tree(list,null);
-		
+		Tree t = new Tree(list,new ArrayList<Wedding>());
+		//t = new Tree(list,new ArrayList<Wedding>());
+		//t.loadFamilies().loadSpouses()
 		try {
-		t.personsToJSONFile("src\\main\\resources\\static\\js\\persons.js");
+			//t.personsToJSONFile("src\\main\\resources\\static\\js\\persons.js");
+			t.loadFamilies().loadSpouses().personsToJSONFile("src\\main\\resources\\static\\js\\persons.js");
+		// t.personToJSONObject -> Not File but Object
+		// 
 	/*	
 		BufferedReader reader = new BufferedReader(new FileReader("src\\main\\resources\\static\\PersonDrawer.html")); 
 		while (reader.ready()) {									    

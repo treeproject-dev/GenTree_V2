@@ -3,10 +3,12 @@ package app.tree;
 import java.io.IOException;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import app.domain.Person;
 import app.domain.Wedding;
 
-
+@Component
 public interface TreeInterface {
 
     /***

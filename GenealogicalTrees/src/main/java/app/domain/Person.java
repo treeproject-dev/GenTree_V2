@@ -21,6 +21,9 @@ public class Person {
 	public Person myMother; // <-
 	public Wedding myFamily; // <- new: myFamily :: Wedding;
 	public String gender;
+	// technical:
+	public int pid; // <- Person's ID from database;
+	public int mid; // <- ID of Persons Family (Alma Mater);
 
 	public Person(String firstName, String surName, String gender, Date dateBirth, int mid) {
 		super();
@@ -50,9 +53,7 @@ public class Person {
 
 
 
-	// technical:
-	public int pid; // <- Person's ID from database;
-	public int mid; // <- ID of Persons Family (Alma Mater);
+
 
 //constructors	
 	public Person() {

@@ -10,10 +10,15 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import app.database.AppConnect;
 import app.domain.Person;
 import app.domain.Wedding;
 
 
+@Component
 public class Tree implements TreeInterface {
 
 	/* Fields */
@@ -289,16 +294,21 @@ public class Tree implements TreeInterface {
 	 * findPerson      :: pid -> [p]; <- 1-list
  	 * findMarriage    :: mid -> [w]; <- 1-list
 	 */
-	
+
 	@Override
 	public TreeInterface loadFamilies()  {
-		return this.p$w( p -> { return Temporary.findMarriage(p.mid);} );
+		
+		
+
+		return this.p$w( p -> { return AppConnect.findByFamiliesId(p.mid);} );
 	}
 	
+	
+	
 	@Override
-	public TreeInterface loadSpouses()  {
-		return this.w$p( w -> { List<Person> x = Temporary.findPerson(w.pidH);
-								List<Person> y = Temporary.findPerson(w.pidW);
+	public TreeInterface loadSpouses()  {	
+		return this.w$p( w -> { List<Person> x = AppConnect.findById(w.pidH);
+								List<Person> y = AppConnect.findById(w.pidW);
 								x.addAll(y);
 								return x;} );
 	}

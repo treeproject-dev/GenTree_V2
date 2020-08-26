@@ -16,34 +16,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import app.database.AppConnect;
 import app.domain.Person;
-import app.service.FindAllByNames;
-import app.service.InsertPersons;
+
 import utils.DateConverters;
 
 @RestController
 public class FirstPage {
 	
-	@Autowired
-	protected AppConnect conn;
+	//@Autowired
+	//protected AppConnect conn;
 	
 	public static DateConverters conv = new DateConverters();
-	//public static AppConnect conn = new AppConnect();
 
-/*	@RequestMapping("/no")
-	public String select() {
-		StringBuilder sb = new StringBuilder();
-		String header = "<html><head><title>FindByID page</title><meta charset=\"utf-8\"><link rel=\"stylesheet\" href=\"/css/design.css\"></head><body>";	
-		sb.append(header);
-		sb.append("<p><a href='/find'>Find By Name</a><br/>");
-		sb.append("<a href='/save'>Save new person</a></p>");
-		sb.append("<a href='/weddings'>Weddings Page</a></p>");
-	
-
-		return sb.toString();
-	}
-*/
-	@Autowired
-	protected InsertPersons save;
+	//@Autowired
+	//protected InsertPersons save;
 	
 	@RequestMapping("/save")
 	@ResponseBody
@@ -82,7 +67,7 @@ public class FirstPage {
 		if (person.getFirstName()!=""||person.getSurName()!="") {
 		
 				try {
-					boolean status = save.insertPerson(person);
+					boolean status = AppConnect.insertPerson(person);
 					if (status) sb.append("<p style='color:green'>Person added in DB</p>");
 					else sb.append("<p style='color:red'>Error, person not added</p>");
 				} catch (Exception e) {
@@ -99,8 +84,8 @@ public class FirstPage {
 		return sb.toString();
 	}
 
-	@Autowired
-	protected FindAllByNames findAll;
+//	@Autowired
+//	protected FindAllByNames findAll;
 	
 	@RequestMapping("/find")
 	@ResponseBody
@@ -120,7 +105,7 @@ public class FirstPage {
 		sb.append("</form><br/>");
 
 		if (name != null && !"".equals(name) && surname != null && !"".equals(surname)) {
-			List<Person> persons = findAll.findAllByNames(name, surname);
+			List<Person> persons = AppConnect.findAllByNames(name, surname);
 			sb.append("<table>");
 			// sb.append("<style>table, th, td {border: 1px solid black;}</style>");
 			sb.append("<tr><td>Id</td><td>Name</td><td>Surname</td></tr>");
