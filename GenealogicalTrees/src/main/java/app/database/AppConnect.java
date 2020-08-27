@@ -30,77 +30,59 @@ import app.domain.Wedding;
 
 @Component
 public class AppConnect {
-	
-	/*
-	@Value("${spring.datasource.url}")
-	private static String url;
-	@Value("${spring.datasource.username}")
-	private static String name;
-	@Value("${spring.datasource.password}")
-	private static String pass;
-	
 
-*/
-	public static String url,name,pass;
+	public static String url, name, pass;
+
 	public AppConnect() {
 		super();
 		getAppProp();
 	}
 
-	
-
-	
-	
-	
 	public static void getAppProp() {
 		try {
-		BufferedReader reader = new BufferedReader(new FileReader("src\\main\\resources\\pass.txt")); 
-		List<String>passFromFile = new ArrayList<>();
-		while (reader.ready()) {									    
-			String str = reader.readLine();
-			passFromFile.add(str);
-			};
+			BufferedReader reader = new BufferedReader(new FileReader("src\\main\\resources\\pass.txt"));
+			List<String> passFromFile = new ArrayList<>();
+			while (reader.ready()) {
+				String str = reader.readLine();
+				passFromFile.add(str);
+			}
+			;
 			url = passFromFile.get(0);
 			name = passFromFile.get(1);
 			pass = passFromFile.get(2);
 			reader.close();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}	
-		
+		}
+
 	}
-	
-	
+
+	public static Connection conn;
+
 	@PostConstruct
 	public static Connection init() {
-		Connection conn = null;		
+
 		try {
-			
-			//String url = "jdbc:mysql://www.999.id.lv/?autoReconnect=true&serverTimezone=UTC&characterEncoding=utf8";
+
+			// String url =
+			// "jdbc:mysql://www.999.id.lv/?autoReconnect=true&serverTimezone=UTC&characterEncoding=utf8";
 			Class.forName("com.mysql.cj.jdbc.Driver"); // Load the driver class
 			conn = DriverManager.getConnection(url, name, pass); // Create connection
 			conn.setAutoCommit(false);
-			
+
 		} catch (Exception e) {
 			System.err.println(e);
 		}
 		return conn;
 	}
-	
+
 	public static List<Wedding> findByFamiliesId(int id) {
 		List<Wedding> weddings = new ArrayList<>();
 		Wedding wedding = new Wedding();
-		
+
 		if (id != 0)
 			try {
-				Connection conn = init();
-				//String url1 = "jdbc:mysql://www.999.id.lv/?autoReconnect=true&serverTimezone=UTC&characterEncoding=utf8";
-				//Class.forName("com.mysql.cj.jdbc.Driver"); // Load the driver class
-				//conn = DriverManager.getConnection(url, name, pass); // Create connection
-				//conn.setAutoCommit(false);
-				//System.out.println("CONNECT IS: " + connect);
-				//System.out.println("CONN is " + connect.conn);
-				// if (connect.conn == null) connect.init();
+				// Connection conn = init();
 				String sql = "SELECT * FROM gentrees.family where family_id=?";
 				PreparedStatement preparedStatement = conn.prepareStatement(sql);
 				preparedStatement.setInt(1, id);
@@ -111,9 +93,8 @@ public class AppConnect {
 				wedding.pidH = rs.getInt(2);
 				wedding.pidW = rs.getInt(3);
 
-			
 				weddings.add(wedding);
-				
+
 			} catch (Exception e) {
 				// Auto-generated catch block
 				e.printStackTrace();
@@ -125,36 +106,33 @@ public class AppConnect {
 
 	public static List<Person> findAllByNames(String firstName, String lastName) {
 
-	    List<Person> persons = new ArrayList<Person>();
-	    
-	    try {
-	    Connection conn = init();
-	      String sql = "SELECT * FROM gentrees.persons where person_name LIKE ? AND person_surname LIKE ?";
-	      //PreparedStatement preparedStatement = conn.Init().prepareStatement(sql);
-	      PreparedStatement preparedStatement = conn.prepareStatement(sql);
-	      preparedStatement.setString(1, "%" + firstName + "%");
-	      preparedStatement.setString(2, "%" + lastName + "%");
-	      
-	      ResultSet rs = preparedStatement.executeQuery();
-	      
-	      while (rs.next()) {
-	        persons.add(new Person(rs.getInt(1), rs.getString(2), rs.getString(3)));
-	      }
-	      
+		List<Person> persons = new ArrayList<Person>();
 
-	    } catch (SQLException e) {
-	      //  Auto-generated catch block
-	      e.printStackTrace();
-	    }
-	    
-	    return persons;
+		try {
 
-	  }
-	
+			String sql = "SELECT * FROM gentrees.persons where person_name LIKE ? AND person_surname LIKE ?";
+			PreparedStatement preparedStatement = conn.prepareStatement(sql);
+			preparedStatement.setString(1, "%" + firstName + "%");
+			preparedStatement.setString(2, "%" + lastName + "%");
+
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				persons.add(new Person(rs.getInt(1), rs.getString(2), rs.getString(3)));
+			}
+
+		} catch (SQLException e) {
+			// Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return persons;
+
+	}
+
 	public static List<Person> findById(int id) {
 		List<Person> persons = new ArrayList<>();
 		try {
-			Connection conn = init();
 			String sql = "SELECT * FROM gentrees.persons where person_id=?";
 			PreparedStatement preparedStatement = conn.prepareStatement(sql);
 			preparedStatement.setInt(1, id);
@@ -167,8 +145,8 @@ public class AppConnect {
 			person.setDateBirth(rs.getDate(4));
 			person.setDeath(rs.getDate(5));
 			person.setGender(rs.getString(6));
-			person.mid =rs.getInt(7);
-			
+			person.mid = rs.getInt(7);
+
 			persons.add(person);
 		} catch (SQLException e) {
 			// Auto-generated catch block
@@ -176,12 +154,11 @@ public class AppConnect {
 		}
 		return persons;
 	}
-	
+
 	public static boolean insertPerson(Person person) {
 
 		int i = 0;
 		try {
-			Connection conn = init();
 			java.sql.Date tmp, tmp2;
 			if (person.getDeath() == null) {
 				tmp = null;
@@ -209,12 +186,11 @@ public class AppConnect {
 
 		return true;
 	}
-	
+
 	public static List<Person> getByGenders(String gender) {
 		List<Person> listByGender = new ArrayList<>();
 
 		try {
-			Connection conn = init();
 			String sql = "SELECT * FROM gentrees.persons where person_gender=?";
 			PreparedStatement preparedStatement = conn.prepareStatement(sql);
 			preparedStatement.setString(1, gender);
@@ -223,13 +199,12 @@ public class AppConnect {
 			while (rs.next())
 				listByGender.add(new Person(rs.getString(2), rs.getString(3)));
 
-			
 		} catch (SQLException e) {
 			// Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return listByGender;
 	}
-	
+
 }

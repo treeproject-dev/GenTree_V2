@@ -34,26 +34,18 @@ public class Person {
 		this.mid = mid;
 	}
 
-
-
 	public Person(int pid, String firstName, String surName) {
-	
+
 		this.firstName = firstName;
 		this.surName = surName;
 		this.pid = pid;
 	}
-
-
 
 	public Person(String firstName, String surName) {
 		super();
 		this.firstName = firstName;
 		this.surName = surName;
 	}
-
-
-
-
 
 //constructors	
 	public Person() {
@@ -163,7 +155,6 @@ public class Person {
 
 	@Override
 	public String toString() {
-//(man.getAge() >= 18) ? "Все в порядке, проходите!" : "Этот фильм не подходит для вашего возраста!";
 		return firstName + " " + surName + " " + gender + " " + ((dateBirth == null) ? "" : dateBirth) + " ";
 	}
 
@@ -202,14 +193,14 @@ public class Person {
 		return res;
 	};
 
-	// TODO Check;
+	// Check;
 	public List<Wedding> getWeddings(Tree t) {
 		List<Wedding> result = t.weddings.stream().filter(w -> this.equals(w.getHusband()) || this.equals(w.getWife()))
 				.collect(Collectors.toList());
 		return result;
 	};
 
-	// TODO Check;
+	// Check;
 	public List<Person> getChildren(Tree t) {
 		return this.search().p_w((p) -> {
 			return this.getWeddings(t);
@@ -224,7 +215,7 @@ public class Person {
 
 	};
 
-	// TODO Check;
+	// Check;
 	public List<Person> getSpouses(Tree t) {
 		return this.search().p_w((Person p) -> {
 			return p.getWeddings(t);
@@ -250,7 +241,7 @@ public class Person {
 		}).toPersons();
 	}
 
-	// TODO
+	//
 	// format "yyyy/mm/dd" or "dd.mm.yyyy" or smth else.
 	public String getDateBirthString(String format) {
 
@@ -273,41 +264,12 @@ public class Person {
 		return res;
 	}
 
-	// TODO read BirthDate from String
+	// read BirthDate from String
 	// format "yyyy/mm/dd"
 	public void setBirthDateFromString(String date, String format) {
 		/* EMPTY */
 	}
 
-	// TODO the same date convertions for Date of death.
-/*
-	// TEST:
-	public static void main(String[] args) {
-		Person pers = new Person();
-		pers.firstName = "Charles";
-		pers.surName = "Darwin";
-		pers.gender = "male";
-		pers.dateBirth = new Date(1809, 02, 12);
-		pers.death = new Date(1882, 04, 19);
-
-		System.out.println(pers.toString());
-		System.out.println(pers.toJSONStr());
-
-		/*
-		 * pers.firstName = "Alexander"; pers.surName = "Pushkin"; pers.gender = "male";
-		 * pers.dateBirth = new Date(1799,05,26); pers.death = new Date(1837,01,29);
-		 */
-/*
-//		pers.birth         =LocalDate()  
-//				new LocalDate(1799,05,26);
-//		pers.dateDeath     =  new LocalDate(1837,01,29);
-
-		System.out.println(pers.toString());
-
-		System.out.println("PersonFrameConstructor:");
-
-	}
-*/
 	/* CONVERTORS */
 
 	public String convertGender() {

@@ -21,12 +21,12 @@ class DateValidatorsTest {
 		boolean result = valid.isBirthDateLessThanDeath(birthDate, death);
 		assertEquals(false, result);
 		death = new Date(2019, 11, 1);
-		result = valid.isBirthDateLessThanDeath(birthDate,death);
+		result = valid.isBirthDateLessThanDeath(birthDate, death);
 		assertEquals(true, result);
 	}
 
 	@Test
-	void testIsBirthDateGreaterThanToday() throws ParseException {		
+	void testIsBirthDateGreaterThanToday() throws ParseException {
 		Date birthDate = sm.parse("2017.01.01");
 		boolean result = valid.isBirthDateGreaterThanToday(birthDate);
 		assertEquals(false, result);
@@ -37,20 +37,19 @@ class DateValidatorsTest {
 
 	@Test
 	void testIfNameHasNumbers() {
-		String badName= "badN2me";
-		String goodName="goodName";
+		String badName = "badN2me";
+		String goodName = "goodName";
 		boolean result = valid.ifNameHasNumbers(badName);
 		assertEquals(false, result);
 		result = valid.ifNameHasNumbers(goodName);
 		assertEquals(true, result);
-		
-	}
 
+	}
 
 	@Test
 	void testHasNameFirstCharSpace() {
-		String badName= " badName";
-		String goodName="goodName";
+		String badName = " badName";
+		String goodName = "goodName";
 		boolean result = valid.hasNameFirstCharSpace(badName);
 		assertEquals(true, result);
 		result = valid.hasNameFirstCharSpace(goodName);
@@ -59,14 +58,12 @@ class DateValidatorsTest {
 
 	@Test
 	void testHasNameLastCharSpace() {
-		String badName= "badName ";
-		String goodName="goodName";
+		String badName = "badName ";
+		String goodName = "goodName";
 		boolean result = valid.hasNameLastCharSpace(badName);
 		assertEquals(true, result);
 		result = valid.hasNameLastCharSpace(goodName);
 		assertEquals(false, result);
 	}
-
-
 
 }

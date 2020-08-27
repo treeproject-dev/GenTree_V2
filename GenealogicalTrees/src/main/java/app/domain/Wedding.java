@@ -9,8 +9,6 @@ import java.util.stream.Collectors;
 import app.tree.Tree;
 import app.tree.TreeInterface;
 
-
-
 public class Wedding {
 
 	/* FIELDS */
@@ -33,7 +31,7 @@ public class Wedding {
 	public int mid; // <- marriage ID;
 	public int pidH; // <- husband's ID;
 	public int pidW; // <- wife's ID;
-	
+
 	// end//
 
 	/****************************************/
@@ -63,9 +61,6 @@ public class Wedding {
 	public void setWife(Person wife) {
 		this.wife = wife;
 	}
-
-
-
 
 	/* ---==[Navigation]==--- */
 
@@ -118,9 +113,9 @@ public class Wedding {
 	public String toString() {
 		return "(" + husband + " <=> " + wife + ")";
 	}
-	
+
 	public String toIdString() {
-		return ""+mid+": "+pidH+" : "+pidW;
+		return "" + mid + ": " + pidH + " : " + pidW;
 	}
 
 }

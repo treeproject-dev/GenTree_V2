@@ -21,21 +21,15 @@ import utils.DateConverters;
 
 @RestController
 public class FirstPage {
-	
-	//@Autowired
-	//protected AppConnect conn;
-	
+
 	public static DateConverters conv = new DateConverters();
 
-	//@Autowired
-	//protected InsertPersons save;
-	
 	@RequestMapping("/save")
 	@ResponseBody
 	public String test(HttpServletRequest request, HttpServletResponse response) {
 
 		StringBuilder sb = new StringBuilder();
-		String header = "<html><head><title>FindByID page</title><meta charset=\"utf-8\"><link rel=\"stylesheet\" href=\"/css/style.css\"></head><body>";	
+		String header = "<html><head><title>FindByID page</title><meta charset=\"utf-8\"><link rel=\"stylesheet\" href=\"/css/style.css\"></head><body>";
 		sb.append(header);
 		sb.append("<p><form action=''>                                              ");
 		sb.append("  <label for='fname'>First name:</label><br/>                    ");
@@ -58,18 +52,28 @@ public class FirstPage {
 
 		if (request.getParameter("gender") != (null)) {
 			Person person = new Person();
-			if (request.getParameter("date")!=""&&!request.getParameter("date").equals(null)){if(conv.isCorrectDate(request.getParameter("date"))) {person.setDateBirth(conv.stringToDate(request.getParameter("date")));}}
-			if (request.getParameter("datedead")!=""&&!request.getParameter("datedead").equals(null)){if(conv.isCorrectDate(request.getParameter("datedead"))) {person.setDeath(conv.stringToDate(request.getParameter("datedead")));}}	
-			
-			person.setFirstName(request.getParameter("name"));	
+			if (request.getParameter("date") != "" && !request.getParameter("date").equals(null)) {
+				if (conv.isCorrectDate(request.getParameter("date"))) {
+					person.setDateBirth(conv.stringToDate(request.getParameter("date")));
+				}
+			}
+			if (request.getParameter("datedead") != "" && !request.getParameter("datedead").equals(null)) {
+				if (conv.isCorrectDate(request.getParameter("datedead"))) {
+					person.setDeath(conv.stringToDate(request.getParameter("datedead")));
+				}
+			}
+
+			person.setFirstName(request.getParameter("name"));
 			person.setSurName(request.getParameter("surname"));
 			person.setGender(request.getParameter("gender"));
-		if (person.getFirstName()!=""||person.getSurName()!="") {
-		
+			if (person.getFirstName() != "" || person.getSurName() != "") {
+
 				try {
 					boolean status = AppConnect.insertPerson(person);
-					if (status) sb.append("<p style='color:green'>Person added in DB</p>");
-					else sb.append("<p style='color:red'>Error, person not added</p>");
+					if (status)
+						sb.append("<p style='color:green'>Person added in DB</p>");
+					else
+						sb.append("<p style='color:red'>Error, person not added</p>");
 				} catch (Exception e) {
 					sb.append("<p style='color:red'>Try again with correct information</p>");
 					System.err.println(e);
@@ -77,24 +81,20 @@ public class FirstPage {
 
 			} else {
 				sb.append("<p style='color:red'>Try again with correct information</p>");
-				}
-			
+			}
+
 		}
 		sb.append("<a href='/'>Back</a></p> ");
 		return sb.toString();
 	}
 
-//	@Autowired
-//	protected FindAllByNames findAll;
-	
 	@RequestMapping("/find")
 	@ResponseBody
 	public String find(@RequestParam(value = "name", required = false) String name,
 			@RequestParam(value = "surname", required = false) String surname, HttpServletRequest request,
 			HttpServletResponse response) {
-		//FindAllByNames find = new FindAllByNames();
 		StringBuilder sb = new StringBuilder();
-		String header = "<html><head><title>FindByID page</title><meta charset=\"utf-8\"><link rel=\"stylesheet\" href=\"/css/style.css\"></head><body>";	
+		String header = "<html><head><title>FindByID page</title><meta charset=\"utf-8\"><link rel=\"stylesheet\" href=\"/css/style.css\"></head><body>";
 		sb.append(header);
 		sb.append("<p><form action=''>");
 		sb.append("<label for='fname'>First name:</label><br/>");
@@ -107,7 +107,6 @@ public class FirstPage {
 		if (name != null && !"".equals(name) && surname != null && !"".equals(surname)) {
 			List<Person> persons = AppConnect.findAllByNames(name, surname);
 			sb.append("<table>");
-			// sb.append("<style>table, th, td {border: 1px solid black;}</style>");
 			sb.append("<tr><td>Id</td><td>Name</td><td>Surname</td></tr>");
 			for (Person it : persons) {
 				String callF = "<a href=/findbyid?id=" + it.getPid() + ">" + it.getPid() + "</a>";

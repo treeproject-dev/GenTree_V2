@@ -13,16 +13,12 @@ import org.springframework.context.annotation.ComponentScan;
 import app.domain.Person;
 import app.domain.Wedding;
 
-
 @ComponentScan
 @EnableAutoConfiguration
 @SpringBootApplication
 public class GenealogicalTreesApplication {
-	 
+
 	public static void main(String[] args) {
 		SpringApplication.run(GenealogicalTreesApplication.class, args);
-		}
-	
-
-
+	}
 }
