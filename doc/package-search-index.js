@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"app.config"},{"l":"app.controller"},{"l":"app.database"},{"l":"app.domain"},{"l":"app.repository"},{"l":"app.service"},{"l":"app.tree"},{"l":"app.users"},{"l":"app.web"},{"l":"app.web.dto"}]
